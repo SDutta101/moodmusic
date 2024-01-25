@@ -1,0 +1,42 @@
+name: Auto Merge Dev1 to Master
+
+on:
+  push:
+    branches:
+      - dev1
+
+env:
+  MY_REPO: https://SDutta101:${{secrets.GITHUB_TOKEN}}@github.com/SDutta101/jest-test.git
+  MY_BRANCH: dev1
+  MASTER_REPO: https://github.com/SDutta101/jest-test.git
+  MASTER_BRANCH: master
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Fetch latest changes from origin/master
+        run: git fetch origin master
+
+      - name: Fetch latest changes from origin/dev1
+        run: git fetch origin dev1
+
+      - name: Verify existence of origin/master
+        run: |
+          if ! git show-ref --quiet refs/remotes/origin/master; then
+            echo "origin/master does not exist."
+            exit 1
+          fi
+
+      - name: Checkout Master Branch
+        run: git checkout -B master origin/master
+
+      - name: Merge dev1 into master
+        run: git merge --allow-unrelated-histories -X theirs origin/dev1 --no-edit
+
+      - name: Push changes to origin/master
+        run: git push --force origin master
