@@ -19,6 +19,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Set Git Config
+        run: |
+          git config user.name "SDutta101"
+          git config user.email "saurav11dutta@gmail.com"
+
       - name: Fetch latest changes from origin/master
         run: git fetch origin master
 
