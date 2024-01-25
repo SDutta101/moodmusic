@@ -6,9 +6,9 @@ on:
       - dev1
 
 env:
-  MY_REPO: https://SDutta101:${{secrets.GITHUB_TOKEN}}@github.com/SDutta101/jest-test.git
+  MY_REPO: https://SDutta101:${{secrets.GITHUB_TOKEN}}@github.com/SDutta101/moodmusic.git
   MY_BRANCH: dev1
-  MASTER_REPO: https://github.com/SDutta101/jest-test.git
+  MASTER_REPO: https://github.com/SDutta101/moodmusic.git
   MASTER_BRANCH: master
 
 jobs:
